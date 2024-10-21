@@ -3,7 +3,6 @@ from tkinter import messagebox
 import requests
 import concurrent.futures
 
-# DoH 服务提供商的 URL
 doh_providers = {
     "Cloudflare": "https://1.1.1.1/dns-query",
     "Google": "https://dns.google/resolve?",
@@ -12,7 +11,6 @@ doh_providers = {
     "OpenDNS": "https://208.67.222.222/dns-query"
 }
 
-# 要查询的域名
 domain = "taobao.com"
 
 def check_doh_availability():
@@ -21,7 +19,6 @@ def check_doh_availability():
     def query(provider, url):
         try:
             print(f"查询 {provider} 的 DoH 服务...")
-            # 发起 GET 请求，并指定查询的域名
             response = requests.get(
                 url,
                 headers={'Accept': 'application/dns-json'},
@@ -43,11 +40,8 @@ def check_doh_availability():
         for future in concurrent.futures.as_completed(future_to_provider):
             provider, success = future.result()
             results[provider] = success
-
-    # 打印所有查询结果
     print("查询结果:", results)
 
-    # 判断 DoH 访问结果
     successful_providers = [provider for provider, success in results.items() if success]
 
     if successful_providers:
@@ -59,7 +53,6 @@ def start_monitoring():
     if messagebox.askyesno("确认", "您是否要开始DoH可用性环境监测？"):
         check_doh_availability()
 
-# 创建 GUI 窗口
 root = tk.Tk()
 root.title("DoH可用性环境监测")
 root.geometry("300x200")
