@@ -1,4 +1,4 @@
-# DoH-Availability-Testing-Tool.
+# DoH-Availability-Testing-Tool
 This tool checks the availability of various DNS over HTTPS (DoH) service providers. It queries a specified domain and reports which providers are accessible from the current network environment.
 
 Features
